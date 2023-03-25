@@ -15,13 +15,12 @@ inputEl.addEventListener(
   debounce(handleSearchCountry, DEBOUNCE_DELAY)
 );
 
-
-function handleSearchCountry (event) {
+function handleSearchCountry(event) {
   event.preventDefault();
 
   let searchQuery = event.target.value.trim().toLowerCase();
   if (!searchQuery) {
-    return
+    return;
   }
 
   fetchCountries(searchQuery)
@@ -32,14 +31,12 @@ function handleSearchCountry (event) {
       } else if (data.length === 1) {
         cleanUpRrenderCountryCardsList();
         return renderCountryCard(data);
-        
       } else {
         return handleTooMatshesFound;
       }
     })
     .catch(handleFetchError);
-    // .finaly(() => searchQuery.reset());
-
+  // .finaly(() => searchQuery.reset());
 }
 
 function renderCountryCardsList(data) {
@@ -57,7 +54,7 @@ function cleanUpRrenderCountryCardsList() {
 }
 
 function cleanUpRenderCountryCard() {
-   countryInfoEl.innerHTML = '';
+  countryInfoEl.innerHTML = '';
 }
 
 function handleTooMatshesFound() {

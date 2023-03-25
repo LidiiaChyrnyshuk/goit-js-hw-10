@@ -16,5 +16,5 @@ export function CountryCard({ flags, name, capital, population, languages }) {
         <p class="description_title">Capital: <span class="description_text">${capital}</span></p>
       <p class="description_title">Populatio: <span class="description_text">${population}</span></p>
       <p class="description_title">Languages: <span class="description_text">${langStr}</span></p>
-      </div>`
+      </div>`;
 }
