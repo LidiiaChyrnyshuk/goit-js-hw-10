@@ -20,6 +20,8 @@ function handleSearchCountry(event) {
 
   let searchQuery = event.target.value.trim().toLowerCase();
   if (!searchQuery) {
+    cleanUpRenderCountryCard();
+    cleanUpRrenderCountryCardsList();
     return;
   }
 
@@ -37,6 +39,8 @@ function handleSearchCountry(event) {
     })
     .catch(handleFetchError);
   // .finaly(() => searchQuery.reset());
+ 
+
 }
 
 function renderCountryCardsList(data) {
