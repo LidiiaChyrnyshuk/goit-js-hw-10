@@ -1,7 +1,7 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
-import fetchCountries from './fetchCountries';
+import { fetchCountries } from './fetchCountries';
 import { CountryCardsList, CountryCard } from './markup';
 
 const inputEl = document.querySelector('#search-box');
@@ -19,7 +19,7 @@ inputEl.addEventListener(
 function handleSearchCountry (event) {
   event.preventDefault();
 
-  const searchQuery = event.target.value.trim().toLowerCase();
+  let searchQuery = event.target.value.trim().toLowerCase();
   if (!searchQuery) {
     return
   }
@@ -27,15 +27,18 @@ function handleSearchCountry (event) {
   fetchCountries(searchQuery)
     .then(data => {
       if (data.length >= 2 && data.length <= 10) {
-        renderCountryCardsList(data);
-      } else if (data[0]) {
-        renderCountryCard(data);
+        cleanUpRenderCountryCard();
+        return renderCountryCardsList(data);
+      } else if (data.length === 1) {
+        cleanUpRrenderCountryCardsList();
+        return renderCountryCard(data);
+        
       } else {
-        handleTooMatshesFound();
+        return handleTooMatshesFound;
       }
     })
-    .catch(handleFetchError())
-    .finaly(() => reset());
+    .catch(handleFetchError);
+    // .finaly(() => searchQuery.reset());
 
 }
 
@@ -47,6 +50,14 @@ function renderCountryCardsList(data) {
 function renderCountryCard(data) {
   const markup = data.map(CountryCard).join('');
   countryInfoEl.innerHTML = markup;
+}
+
+function cleanUpRrenderCountryCardsList() {
+  countryListEl.innerHTML = '';
+}
+
+function cleanUpRenderCountryCard() {
+   countryInfoEl.innerHTML = '';
 }
 
 function handleTooMatshesFound() {

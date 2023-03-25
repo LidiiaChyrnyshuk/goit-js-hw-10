@@ -1,12 +1,12 @@
 export function CountryCardsList({ flags, name }) {
   return `<li class="country-list_item">
         <img class="country-list_svg" src="${flags.svg}"alt="countries flag" width="30px" height="20px">
-        <p class="country-list_name">${name}</p>
-      </li>`
+        <p class="country-list_name">${name.official}</p>
+      </li>`;
 }
 
 export function CountryCard({ flags, name, capital, population, languages }) {
-  const langStr = Object.values(languages);
+  const langStr = Object.values(languages).join(', ');
 
   return `<div class="country-info_title">
         <img class="country-info_title-svg" src="${flags.svg}" alt="countries flag" width="60px" height="40px">
