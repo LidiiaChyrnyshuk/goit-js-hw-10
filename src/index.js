@@ -4,6 +4,8 @@ import debounce from 'lodash.debounce';
 import { fetchCountries } from './fetchCountries';
 import { CountryCardsList, CountryCard } from './markup';
 
+
+
 const inputEl = document.querySelector('#search-box');
 const countryListEl = document.querySelector('.country-list');
 const countryInfoEl = document.querySelector('.country-info');
@@ -34,7 +36,7 @@ function handleSearchCountry(event) {
         cleanUpRrenderCountryCardsList();
         return renderCountryCard(data);
       } else {
-        return handleTooMatshesFound;
+        return handleTooMatshesFound ();
       }
     })
     .catch(handleFetchError);
